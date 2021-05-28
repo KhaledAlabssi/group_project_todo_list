@@ -62,6 +62,9 @@ function updateTodos() {
 
         item.addEventListener('contextmenu', k => {
             k.preventDefault()
+            if(todos.length < 2) {
+                alert('You are deleting your last to-do\nDo not forget to add new to-do before you leave the page :)')
+            }
 
             let index = todos.findIndex(p => p.text === k.target.innerText)
             console.log(k.target.innerText)
@@ -81,11 +84,17 @@ function updateTodos() {
 // Create todo
 form.addEventListener('submit', i => {
     i.preventDefault()
-
-    todos.unshift({ 'text': input.value, 'complete': false })
+    if(todos.length > 5) {
+        alert('You are using the free version of C & K to-dos\nPlease contact the contributors or delete some of the to-dos below\nin order to add new to-do item.')
+    } else {
+        todos.unshift({ 'text': input.value, 'complete': false })
     localStorage.setItem('todos', JSON.stringify(todos))
     input.value = ''
     updateTodos()
+
+    }
+
+    
 
 })
 
