@@ -6,7 +6,7 @@ const list = document.querySelector('ul')
 
 // creating array of object
 let todos = [
-    {'text': 'Walk the dog', 'complete': false},
+    { 'text': 'Walk the dog', 'complete': false },
 ]
 // updateTodos()
 
@@ -19,17 +19,18 @@ if (localStorage.getItem('todos') === null) {
 }
 
 // Update todos list
-function updateTodos () {
+function updateTodos() {
+
     list.innerHTML = ''
-    
+
     todos.forEach(i => {
         let item = document.createElement('li')
-        
+
         i.complete ? item.classList.add('complete') : item.classList.add('item')
-        
+
         item.innerText = i.text
         item.addEventListener('click', j => {
-            
+
             // i.preventDefault()
             if (item.classList.contains('complete')) {
                 i.complete = false
@@ -37,38 +38,43 @@ function updateTodos () {
 
             } else {
                 i.complete = true
-            updateTodos()
+                updateTodos()
 
             }
-                      
+
         })
-        item.addEventListener('click', j => {
-            
-            
+        item.addEventListener('click', l => {
+
+
             if (item.classList.contains('complete')) {
-                i.complete = false
+                l.complete = false
                 localStorage.setItem('todos', JSON.stringify(todos))
                 updateTodos()
 
             } else {
-                i.complete = true
+                l.complete = true
                 localStorage.setItem('todos', JSON.stringify(todos))
-            updateTodos()
+                updateTodos()
 
             }
-                      
+
         })
 
         item.addEventListener('contextmenu', k => {
             k.preventDefault()
 
-            item.remove()
-            todos.splice(i, 1)
+            let index = todos.findIndex(p => p.text === k.target.innerText)
+            console.log(k.target.innerText)
+
+
+            todos.splice(index, 1)
             localStorage.setItem('todos', JSON.stringify(todos))
+            updateTodos()
+
         })
- 
+
         list.appendChild(item)
-        
+
     })
 }
 
@@ -76,7 +82,7 @@ function updateTodos () {
 form.addEventListener('submit', i => {
     i.preventDefault()
 
-    todos.push({'text': input.value, 'complete': false})
+    todos.unshift({ 'text': input.value, 'complete': false })
     localStorage.setItem('todos', JSON.stringify(todos))
     input.value = ''
     updateTodos()
