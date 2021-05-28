@@ -7,10 +7,16 @@ const list = document.querySelector('ul')
 // creating array of object
 let todos = [
     {'text': 'Walk the dog', 'complete': false},
-    {'text': 'Buy some milk', 'complete': true},
-    {'text': 'Call the doctor', 'complete': false}
 ]
 // updateTodos()
+
+
+if (localStorage.getItem('todos') === null) {
+    localStorage.setItem('todos', JSON.stringify(todos))
+} else {
+    todos = JSON.parse(localStorage.getItem('todos'))
+    console.log(todos)
+}
 
 // Update todos list
 function updateTodos () {
@@ -41,10 +47,12 @@ function updateTodos () {
             
             if (item.classList.contains('complete')) {
                 i.complete = false
+                localStorage.setItem('todos', JSON.stringify(todos))
                 updateTodos()
 
             } else {
                 i.complete = true
+                localStorage.setItem('todos', JSON.stringify(todos))
             updateTodos()
 
             }
@@ -56,6 +64,7 @@ function updateTodos () {
 
             item.remove()
             todos.splice(i, 1)
+            localStorage.setItem('todos', JSON.stringify(todos))
         })
  
         list.appendChild(item)
@@ -66,7 +75,9 @@ function updateTodos () {
 // Create todo
 form.addEventListener('submit', i => {
     i.preventDefault()
-    todos.unshift({'text': input.value, 'complete': false})
+
+    todos.push({'text': input.value, 'complete': false})
+    localStorage.setItem('todos', JSON.stringify(todos))
     input.value = ''
     updateTodos()
 
