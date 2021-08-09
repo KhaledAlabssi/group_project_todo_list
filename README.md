@@ -10,4 +10,5 @@ Simple to-do app was build as the first project for WBS 'full stack' bootcamp.
 - HTML
 - CSS
 - JavaScript
-_ Localhost
+- Localhost
+
