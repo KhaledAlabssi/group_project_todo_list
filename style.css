@@ -11,19 +11,25 @@ body {
   align-items: center;
   color: #333;
   overflow: hidden;
-  margin: 0;
+  
   padding: 0;
-  background: rgb(2, 0, 36);
+  /* background: rgb(2, 0, 36);
   background: linear-gradient(
     90deg,
     rgba(2, 0, 36, 1) 0%,
     rgba(6, 34, 82, 1) 64%,
     rgba(8, 155, 185, 1) 100%
-  );
+  ); */
+
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(to top right, transparent 49.8%, goldenrod 50%) right -1px
+      top 0 /50% 100% no-repeat,
+    #297fca;
 }
 
 h1 {
-    color: goldenrod;
+  color: goldenrod;
 }
 
 .container {
@@ -70,4 +76,8 @@ li {
 
 .complete {
   text-decoration: line-through;
+}
+
+p {
+  color: goldenrod;
 }
